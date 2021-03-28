@@ -1,0 +1,44 @@
+---
+- name: Build Duplicati Github Release URL
+  set_fact:
+    duplicati_github_url: '{{ github_api_url }}/{{ duplicati_github_repo }}/releases'
+
+- name: Gather Duplicati Releases
+  uri: url='{{ duplicati_github_url }}' return_content=true
+  register: duplicati_url_result
+
+- name: Set Duplicati Release Distribution (Redhat)
+  set_fact:
+    duplicati_distro: 'rpm'
+  when: ansible_os_family | lower == 'redhat'
+
+- name: Build Duplicati Asset List
+  set_fact:
+    duplicati_assets: "{{ duplicati_url_result.json | map(attribute='assets') | list | flatten }}"
+
+- name: Build Duplicati Download URL List
+  set_fact:
+    duplicati_urls: "{{ duplicati_assets | map(attribute='browser_download_url') | list }}"
+
+- name: Filter Duplicati Release URL List by Distribution
+  set_fact:
+    duplicati_distro_urls: "{{ duplicati_urls | select('search', duplicati_distro) | list }}"
+
+- name: Get Duplicati Release URL List (Latest)
+  set_fact:
+    duplicati_release_url_list: "{{ duplicati_distro_urls | list }}"
+  when:
+    - duplicati_release_version is defined
+    - duplicati_release_version | lower == 'latest'
+
+- name: Get Duplicati Release URL List (Specific)
+  set_fact:
+    duplicati_release_url_list: "{{ duplicati_distro_urls | select('search', duplicati_release_version) | list }}"
+  when:
+    - duplicati_release_version is defined
+    - not duplicati_release_version | lower == 'latest'
+
+- name: Filter for First Duplicati Release URL
+  set_fact:
+    duplicati_release_url: "{{ duplicati_release_url_list | list | first }}"
+  when: duplicati_release_url_list | list | first is defined

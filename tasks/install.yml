@@ -1,0 +1,7 @@
+---
+- name: Install Duplicati (Redhat)
+  become: true
+  yum:
+    name: '{{ duplicati_release_url }}'
+    state: present
+  when: ansible_os_family | lower == 'redhat'

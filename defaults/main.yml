@@ -1,0 +1,30 @@
+---
+# Github's API URL for release information
+github_api_url: https://api.github.com/repos
+
+# Duplicati Github repo
+duplicati_github_repo: duplicati/duplicati
+
+# Duplicati release version
+# Possible options are 'latest'
+# or a specific release such as
+# 'v2.0.4.5' or '2.0.4.10'
+duplicati_release_version: latest
+
+# Default port for the Duplicati web UI
+duplicati_web_port: '8200'
+
+# Interface for the Duplicati web UI
+# Can be any or IP based
+duplicati_web_interface: any
+
+# Allowed hostnames for the Duplicati
+# web UI
+# '*' means any hostname
+duplicati_web_hostnames: '*'
+
+## Duplicati service user
+# This is the user account that
+# would be used to run the daemon
+# If left blank the service runs as root
+duplicati_service_user: ''

@@ -1,0 +1,14 @@
+[Unit]
+Description=Duplicati Backup software
+After=network.target
+
+[Service]
+User={{ duplicati_service_user | default(omit) }}
+Nice=19
+IOSchedulingClass=idle
+EnvironmentFile=-/etc/default/duplicati
+ExecStart=/usr/bin/mono /usr/lib/duplicati/Duplicati.Server.exe --webservice-port={{ duplicati_web_port }} --webservice-interface={{ duplicati_web_interface }} --webservice-allowed-hostnames={{ duplicati_web_hostnames }}
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
