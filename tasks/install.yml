@@ -1,7 +1,10 @@
 ---
-- name: Install Duplicati (Redhat)
-  become: true
-  yum:
-    name: '{{ duplicati_release_url }}'
-    state: present
+- name: Copy RPM Duplicati file to server
+  get_url:
+     url: '{{ duplicati_release_url }}'
+     dest: /tmp/package.rpm
+
+- name: Install package
+  command: rpm -ivh --nodeps /tmp/package.rpm
   when: ansible_os_family | lower == 'redhat'
+

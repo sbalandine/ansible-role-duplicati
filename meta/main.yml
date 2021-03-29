@@ -1,7 +1,7 @@
 ---
 dependencies: []
 
-galaxy_info:galaxy_info:
+galaxy_info:
   role_name: duplicati
   author: sbalandine
   description: Duplicati installation for CentOS/Redhat based Linux systems
