@@ -3,6 +3,7 @@
   get_url:
      url: '{{ duplicati_release_url }}'
      dest: /tmp/package.rpm
+  when: ansible_os_family | lower == 'redhat'
 
 - name: Install package
   command: rpm -ivh --nodeps /tmp/package.rpm

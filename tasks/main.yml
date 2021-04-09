@@ -15,7 +15,7 @@
 - name: Import Install Tasks
   tags: ["install-duplicati"]
   import_tasks:
-    file: install.yml
+    file: install.centos.7.yml
   when: duplicati_release_url is defined
 
 - name: Import Service Tasks
