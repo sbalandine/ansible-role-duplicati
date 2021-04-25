@@ -42,3 +42,8 @@
   set_fact:
     duplicati_release_url: "{{ duplicati_release_url_list | list | first }}"
   when: duplicati_release_url_list | list | first is defined
+
+- name: Display Duplicati
+  debug:
+    msg: 
+      - '{{ duplicati_release_url }}'
