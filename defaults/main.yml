@@ -9,7 +9,7 @@ duplicati_github_repo: duplicati/duplicati
 # Possible options are 'latest'
 # or a specific release such as
 # 'v2.0.4.5' or '2.0.4.10'
-duplicati_release_version: latest
+duplicati_release_version: 2.0.5.114
 
 # Default port for the Duplicati web UI
 duplicati_web_port: '8200'
